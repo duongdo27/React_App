@@ -1,6 +1,27 @@
 import React from 'react';
 import QuickBlock from './QuickBlock.js'
 
+function generateBlock() {
+    var a = Math.floor(Math.random() * 100);
+    var b = Math.floor(Math.random() * 100);
+    var c = Math.floor(Math.random() * 100);
+    var d = Math.floor(Math.random() * 100);
+
+    var answer = 1;
+    if(a + b == c + d){
+        answer = 0;
+    }
+    else if(a + b < c + d){
+        answer = -1;
+    }
+    return {
+        left: a + " + " + b,
+        right: c + " + " + d,
+        answer: answer,
+    };
+}
+
+
 export default class QuickMath extends React.Component {
   constructor(props){
     super(props);
@@ -8,9 +29,9 @@ export default class QuickMath extends React.Component {
     this.state = {
         message: 'Hello',
         blocks: [
-            {left: "10 + 2", right: "3 + 12", answer: -1},
-            {left: "9 + 5", right: "3 + 8", answer: 1},
-            {left: "9 + 2", right: "3 + 8", answer: 0},
+            generateBlock(),
+            generateBlock(),
+            generateBlock(),
         ],
     };
   }
