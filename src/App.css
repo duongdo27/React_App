@@ -38,3 +38,15 @@
    padding-top: 10px;
    border-radius: 25px;
 }
+
+.quick-block {
+   font-size: 1.2em;
+   background-color: lightyellow;
+   margin: 20px;
+   padding-top: 10px;
+   border-radius: 25px;
+}
+
+.quick-btn {
+    margin: 10px;
+}
