@@ -1,11 +1,16 @@
 import React from 'react';
 import QuickBlock from './QuickBlock.js'
 
-function generateBlock() {
-    var a = Math.floor(Math.random() * 100);
-    var b = Math.floor(Math.random() * 100);
-    var c = Math.floor(Math.random() * 100);
-    var d = Math.floor(Math.random() * 100);
+function generateBlock(score) {
+    var scale = 10;
+    if(score) {
+        scale += 10 * score;
+    }
+
+    var a = Math.floor(Math.random() * scale);
+    var b = Math.floor(Math.random() * scale);
+    var c = Math.floor(Math.random() * scale);
+    var d = Math.floor(Math.random() * scale);
 
     var answer = 1;
     if(a + b == c + d){
@@ -34,9 +39,27 @@ export default class QuickMath extends React.Component {
             generateBlock(),
         ],
         score: 0,
+        counter: 5,
     };
 
+    this.tick = this.tick.bind(this);
     this.checkAnswer = this.checkAnswer.bind(this);
+  }
+
+  tick() {
+    if(this.state.counter > 0 && this.state.blocks.length > 0){
+       this.setState({
+            counter: this.state.counter - 1,
+       });
+       return;
+    }
+
+    var new_blocks = this.state.blocks.slice(0);
+    new_blocks.push(generateBlock(this.state.score));
+    this.setState({
+        counter: 5,
+        blocks: new_blocks,
+    });
   }
 
   checkAnswer(block_id, answer) {
@@ -57,6 +80,10 @@ export default class QuickMath extends React.Component {
             blocks: new_blocks,
         });
     }
+  }
+
+  componentDidMount() {
+    this.interval = setInterval(this.tick, 1000);
   }
 
   render() {
