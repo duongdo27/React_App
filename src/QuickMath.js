@@ -32,7 +32,8 @@ export default class QuickMath extends React.Component {
     super(props);
 
     this.state = {
-        message: 'Hello',
+        screen: "start",
+        message: '',
         blocks: [
             generateBlock(),
             generateBlock(),
@@ -44,6 +45,21 @@ export default class QuickMath extends React.Component {
 
     this.tick = this.tick.bind(this);
     this.checkAnswer = this.checkAnswer.bind(this);
+    this.startGame = this.startGame.bind(this);
+  }
+
+  startGame(){
+    this.setState({
+        screen: "play",
+        message: '',
+        blocks: [
+            generateBlock(),
+            generateBlock(),
+            generateBlock(),
+        ],
+        score: 0,
+        counter: 5,
+    });
   }
 
   tick() {
@@ -87,6 +103,30 @@ export default class QuickMath extends React.Component {
   }
 
   render() {
+    if(this.state.screen == "start") {
+        return (
+            <div className="quick-math row">
+                <button className="quick-btn btn btn-success"
+                        onClick={this.startGame}>
+                    Start
+                </button>
+            </div>
+        );
+    }
+
+    if(this.state.screen == "restart") {
+        return (
+            <div className="quick-math row">
+                <p>Score: {this.state.score}</p>
+                <p>High score: </p>
+                <button className="quick-btn btn btn-success"
+                        onClick={this.startGame}>
+                    Restart
+                </button>
+            </div>
+        );
+    }
+
     var outputRender = this.state.blocks.map((value, idx) => {
       return (<QuickBlock id={idx}
                           left={value.left}
