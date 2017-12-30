@@ -66,6 +66,14 @@ export default class QuickMath extends React.Component {
   }
 
   tick() {
+    if(this.state.counter == 0 && this.state.blocks.length > 9){
+        this.setState({
+            screen: "restart",
+            highscore: Math.max(this.state.score, this.state.highscore),
+        });
+        return;
+    }
+
     if(this.state.counter > 0 && this.state.blocks.length > 0){
        this.setState({
             counter: this.state.counter - 1,
