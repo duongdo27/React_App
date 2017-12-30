@@ -42,6 +42,7 @@ export default class QuickMath extends React.Component {
         score: 0,
         counter: 5,
         wrongs: 0,
+        highscore: 0,
     };
 
     this.tick = this.tick.bind(this);
@@ -95,6 +96,7 @@ export default class QuickMath extends React.Component {
     else if (this.state.wrongs == 4) {
         this.setState({
             screen: "restart",
+            highscore: Math.max(this.state.score, this.state.highscore),
         });
     }
     else {
@@ -126,7 +128,7 @@ export default class QuickMath extends React.Component {
         return (
             <div className="quick-math row">
                 <p>Score: {this.state.score}</p>
-                <p>High score: </p>
+                <p>High score: {this.state.highscore}</p>
                 <button className="quick-btn btn btn-success"
                         onClick={this.startGame}>
                     Restart
