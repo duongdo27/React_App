@@ -41,6 +41,7 @@ export default class QuickMath extends React.Component {
         ],
         score: 0,
         counter: 5,
+        wrongs: 0,
     };
 
     this.tick = this.tick.bind(this);
@@ -59,6 +60,7 @@ export default class QuickMath extends React.Component {
         ],
         score: 0,
         counter: 5,
+        wrongs: 0,
     });
   }
 
@@ -90,10 +92,16 @@ export default class QuickMath extends React.Component {
             blocks: new_blocks,
         });
     }
+    else if (this.state.wrongs == 4) {
+        this.setState({
+            screen: "restart",
+        });
+    }
     else {
         this.setState({
             message: 'Incorrect',
             blocks: new_blocks,
+            wrongs: this.state.wrongs + 1,
         });
     }
   }
@@ -138,6 +146,7 @@ export default class QuickMath extends React.Component {
       <div className="quick-math row">
         <p>{this.state.message}</p>
         <p>Score: {this.state.score}</p>
+        <p>Wrongs: {this.state.wrongs}</p>
         {outputRender}
       </div>
     );
