@@ -13,7 +13,7 @@ function generateBlock(score) {
     var d = Math.floor(Math.random() * scale);
 
     var answer = 1;
-    if(a + b == c + d){
+    if(a + b === c + d){
         answer = 0;
     }
     else if(a + b < c + d){
@@ -66,7 +66,7 @@ export default class QuickMath extends React.Component {
   }
 
   tick() {
-    if(this.state.counter == 0 && this.state.blocks.length > 9){
+    if(this.state.counter === 0 && this.state.blocks.length > 9){
         this.setState({
             screen: "restart",
             highscore: Math.max(this.state.score, this.state.highscore),
@@ -94,14 +94,14 @@ export default class QuickMath extends React.Component {
     var new_blocks = this.state.blocks.slice(0);
     new_blocks.splice(block_id, 1);
 
-    if(answer == correct_answer){
+    if(answer === correct_answer){
         this.setState({
             score: this.state.score + 1,
             message: 'Correct',
             blocks: new_blocks,
         });
     }
-    else if (this.state.wrongs == 4) {
+    else if (this.state.wrongs === 4) {
         this.setState({
             screen: "restart",
             highscore: Math.max(this.state.score, this.state.highscore),
@@ -121,7 +121,7 @@ export default class QuickMath extends React.Component {
   }
 
   render() {
-    if(this.state.screen == "start") {
+    if(this.state.screen === "start") {
         return (
             <div className="quick-math row">
                 <button className="quick-btn btn btn-success"
@@ -132,7 +132,7 @@ export default class QuickMath extends React.Component {
         );
     }
 
-    if(this.state.screen == "restart") {
+    if(this.state.screen === "restart") {
         return (
             <div className="quick-math row">
                 <p>Score: {this.state.score}</p>

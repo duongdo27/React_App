@@ -36,7 +36,7 @@ class App extends Component {
     var title = "React App"
 
 
-    if(this.state.screen == "quick-math"){
+    if(this.state.screen === "quick-math"){
         outputRender = (<div>
             <QuickMath />
             <button className="quick-btn btn btn-warning"
@@ -46,7 +46,7 @@ class App extends Component {
         </div>);
         title = "Quick Math";
     }
-    else if(this.state.screen == "multiply-table"){
+    else if(this.state.screen === "multiply-table"){
         outputRender = (<div>
             <MultiplyTable />
             <button className="quick-btn btn btn-warning"
